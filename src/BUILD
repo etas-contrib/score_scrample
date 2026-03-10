@@ -10,6 +10,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+
 cc_binary(
     name = "scrample",
     srcs = [
@@ -55,3 +57,16 @@ cc_library(
         "@score_communication//score/mw/com",
     ],
 )
+
+pkg_tar(
+    name = "scrample_tgz",
+    srcs = [
+        ":scrample",
+        "etc/logging.json",
+        "etc/mw_com_config.json",
+    ],
+    extension = "tgz",
+    strip_prefix = ".",
+    visibility = ["//visibility:public"],
+)
+
