@@ -58,7 +58,13 @@ archive_override(
     urls = ["https://github.com/nelhage/rules_boost/archive/refs/heads/master.tar.gz"],
 )
 
-bazel_dep(name = "boost.program_options", version = "1.87.0")
+# NOTE: this dependency could be generate integration build conflict with the dep
+#       inlcuded in score_communication so could be necessary to align to the same
+# bazel_dep(name = "boost.program_options", version = "1.87.0")
+# bazel_dep(name = "boost.program_options", version = "1.87.0", dev_dependency = True)
+# -> dep version compatible with score_communication 0.2.1
+bazel_dep(name = "boost.program_options", version = "1.83.0.bcr.4")
+#################################################################################
 
 # C/C++ rules for Bazel
 bazel_dep(name = "rules_cc", version = "0.2.1")
